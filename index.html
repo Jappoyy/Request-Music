@@ -5,36 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Musik</title>
     <link rel="stylesheet" href="https://htmlku.com/gaboleya/play/style.css">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        h2, p {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #requestForm, #hasil {
+            display: none;
+        }
+
+        .gif {
+            width: 150px;
+            margin: 10px auto;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade {
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .slide {
+            animation: slideUp 0.8s ease-in-out forwards;
+        }
+    </style>
 </head>
 <body>
 
     <div class="container">
-        <h2>Masukkan Nama</h2>
+        <h2 class="fade">Masukkan Nama</h2>
         <input type="text" id="nama" placeholder="Nama kamu..." required>
 
-        <h2>Mamu mau request musik?</h2>
-        <button onclick="lanjut()">iyaa</button>
+        <img src="https://media.giphy.com/media/3ohs4BSacFKI7A717y/giphy.gif" class="gif" id="gif1">
 
-        <form id="requestForm" action="https://formspree.io/f/maneykvq" method="POST" style="display: none;">
-            <h2>Mau request lagu apa?</h2>
+        <h2 class="fade">Mamu mau request musik?</h2>
+        <button onclick="lanjut()" class="slide">iyaa</button>
+
+        <form id="requestForm" action="https://formspree.io/f/maneykvq" method="POST">
+            <h2 class="fade">Mau request lagu apa?</h2>
             <input type="hidden" name="Nama" id="namaInput">
             <input type="text" name="Judul Lagu" id="judul" placeholder="Judul lagu" required>
             <input type="text" name="Artis" id="artis" placeholder="Nama artis" required>
 
-            <button type="submit">Kirim Request</button>
+            <img src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif" class="gif" id="gif2">
+
+            <button type="submit" class="slide">Kirim Request</button>
         </form>
 
-        <div id="hasil" style="display: none;">
-            <h2>Yeaaayyy! ✨</h2>
-            <p>Request mu berhasil dikirim! 💕</p>
-            <p>Harap menunggu respon dari kami 😇🙏🏻</p>
-            <button onclick="kembali()">Kembali</button>
+        <div id="hasil">
+            <h2 class="fade">Yeaaayyy! ✨</h2>
+            <p class="fade">Request mu berhasil dikirim! 💕</p>
+            <p class="fade">Harap menunggu respon dari kami 😇🙏🏻</p>
+
+            <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" class="gif" id="gif3">
+
+            <button onclick="kembali()" class="slide">Kembali</button>
         </div>
     </div>
 
     <script>
         function lanjut() {
             document.getElementById("requestForm").style.display = "block";
+            document.getElementById("requestForm").classList.add("fade");
+            document.getElementById("gif1").style.display = "block";
         }
 
         document.getElementById("requestForm").addEventListener("submit", function(event) {
@@ -43,6 +127,9 @@
 
             document.getElementById("requestForm").style.display = "none";
             document.getElementById("hasil").style.display = "block";
+            document.getElementById("hasil").classList.add("fade");
+            document.getElementById("gif2").style.display = "block";
+            document.getElementById("gif3").style.display = "block";
 
             setTimeout(() => {
                 kembali();
