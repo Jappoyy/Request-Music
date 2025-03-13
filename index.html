@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><style>
+    button {
+        background-color: #ff69b4;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    button:hover {
+        transform: scale(1.1) rotate(-3deg);
+    }
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Lagu</title>
+</head>
+<body><button>💖 Kirim Request 💖</button>
+
+    <h2>Request Lagu Favoritmu</h2>
+    <form action="https://formspree.io/f/maneykvq" method="POST">
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" name="nama" required><br><br>
+        
+        <label for="judul">Judul Lagu:</label>
+        <input type="text" id="judul" name="judul" required><br><br>
+        
+        <label for="artis">Artis:</label>
+        <input type="text" id="artis" name="artis" required><br><br>
+        
+        <button type="submit">Kirim</button>
+    </form>
+</body>
+</html>
