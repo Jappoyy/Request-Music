@@ -1,38 +1,58 @@
 <!DOCTYPE html>
 <html lang="id">
-<head><style>
-    button {
-        background-color: #1e81b0;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 1.2em;
-        border-radius: 10px;
-        transition: transform 0.2s ease-in-out;
-    }
-
-    button:hover {
-        transform: scale(1.1) rotate(-2deg);
-    }
-</style>
-
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Lagu</title>
+    <title>Request Musik</title>
+    <link rel="stylesheet" href="https://htmlku.com/gaboleya/play/style.css">
 </head>
 <body>
 
-    <h2>Request Lagu Favoritmu</h2>
-    <form action="https://formspree.io/f/maneykvq" method="POST">
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" required><br><br>
-        
-        <label for="judul">Judul Lagu:</label>
-        <input type="text" id="judul" name="judul" required><br><br>
-        
-        <label for="artis">Artis:</label>
-        <input type="text" id="artis" name="artis" required><br><br>
-<button>💖 Kirim Request 💖</button>
-    </form>
+    <div class="container">
+        <h2>Masukkan Nama</h2>
+        <input type="text" id="nama" placeholder="Nama kamu..." required>
+
+        <h2>Mamu mau request musik?</h2>
+        <button onclick="lanjut()">iyaa</button>
+
+        <form id="requestForm" action="https://formspree.io/f/maneykvq" method="POST" style="display: none;">
+            <h2>Mau request lagu apa?</h2>
+            <input type="hidden" name="Nama" id="namaInput">
+            <input type="text" name="Judul Lagu" id="judul" placeholder="Judul lagu" required>
+            <input type="text" name="Artis" id="artis" placeholder="Nama artis" required>
+
+            <button type="submit">Kirim Request</button>
+        </form>
+
+        <div id="hasil" style="display: none;">
+            <h2>Yeaaayyy! ✨</h2>
+            <p>Request mu berhasil dikirim! 💕</p>
+            <p>Harap menunggu respon dari kami 😇🙏🏻</p>
+            <button onclick="kembali()">Kembali</button>
+        </div>
+    </div>
+
+    <script>
+        function lanjut() {
+            document.getElementById("requestForm").style.display = "block";
+        }
+
+        document.getElementById("requestForm").addEventListener("submit", function(event) {
+            let nama = document.getElementById("nama").value;
+            document.getElementById("namaInput").value = nama;
+
+            document.getElementById("requestForm").style.display = "none";
+            document.getElementById("hasil").style.display = "block";
+
+            setTimeout(() => {
+                kembali();
+            }, 3000);
+        });
+
+        function kembali() {
+            location.reload();
+        }
+    </script>
+
 </body>
 </html>
