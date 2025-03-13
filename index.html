@@ -6,134 +6,146 @@
     <title>Request Musik</title>
     <link rel="stylesheet" href="https://htmlku.com/gaboleya/play/style.css">
     <style>
-        body {
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: rgb(34, 193, 195);
+            background: linear-gradient(135deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+            transition: background 0.5s ease-in-out;
         }
 
         .container {
-            margin-top: 50px;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
+            background: #1DB954; /* Warna hijau seperti Spotify */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            color: white;
         }
 
         h2, p {
-            opacity: 0;
-            animation: fadeIn 1s ease-in-out forwards;
+            margin-bottom: 15px;
         }
 
         input, button {
-            display: block;
             width: 100%;
-            margin: 10px 0;
             padding: 10px;
+            margin: 10px 0;
             border: 2px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
-            transition: 0.3s;
         }
 
         button {
-            background: #007bff;
+            background: #191414; /* Warna tombol hitam seperti di Spotify */
             color: white;
             cursor: pointer;
             border: none;
+            transition: 0.3s;
         }
 
         button:hover {
-            background: #0056b3;
+            background: #000000;
         }
 
-        #requestForm, #hasil {
+        .page {
             display: none;
+        }
+
+        .active {
+            display: block;
         }
 
         .gif {
             width: 150px;
             margin: 10px auto;
-            display: none;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade {
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
-
-        .slide {
-            animation: slideUp 0.8s ease-in-out forwards;
-        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h2 class="fade">Masukkan Nama</h2>
-        <input type="text" id="nama" placeholder="Nama kamu..." required>
-
-        <img src="https://media.giphy.com/media/3ohs4BSacFKI7A717y/giphy.gif" class="gif" id="gif1">
-
-        <h2 class="fade">Kamu mau request musik?</h2>
-        <button onclick="lanjut()" class="slide">iyaa</button>
-
-        <form id="requestForm" action="https://formspree.io/f/maneykvq" method="POST">
-            <h2 class="fade">Mau request lagu apa?</h2>
-            <input type="hidden" name="Nama" id="namaInput">
-            <input type="text" name="Judul Lagu" id="judul" placeholder="Judul lagu" required>
-            <input type="text" name="Artis" id="artis" placeholder="Nama artis" required>
-
-            <img src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif" class="gif" id="gif2">
-
-            <button type="submit" class="slide">Kirim Request</button>
-        </form>
-
-        <div id="hasil">
-            <h2 class="fade">Yeaaayyy! ✨</h2>
-            <p class="fade">Request mu berhasil dikirim! 💕</p>
-            <p class="fade">Harap menunggu respon dari kami 😇🙏🏻</p>
-
-            <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" class="gif" id="gif3">
-
-            <button onclick="kembali()" class="slide">Kembali</button>
+        
+        <!-- Halaman 1: Input Nama -->
+        <div id="page1" class="page active">
+            <h2>Masukkan Nama</h2>
+            <input type="text" id="nama" placeholder="Nama kamu..." required>
+            <button onclick="nextPage(2)">Lanjut</button>
         </div>
+
+        <!-- Halaman 2: Request Lagu -->
+        <div id="page2" class="page">
+            <h2>Kamu mau request musik?</h2>
+            <img src="https://media.giphy.com/media/3ohs4BSacFKI7A717y/giphy.gif" class="gif">
+            <button onclick="nextPage(3)">iyaa</button>
+        </div>
+
+        <!-- Halaman 3: Form Lagu -->
+        <div id="page3" class="page">
+            <h2>Mau request lagu apa?</h2>
+            <form id="requestForm">
+                <input type="hidden" name="Nama" id="namaInput">
+                <input type="text" name="Judul Lagu" id="judul" placeholder="Judul lagu" required>
+                <input type="text" name="Artis" id="artis" placeholder="Nama artis" required>
+                <button type="submit">Kirim Request</button>
+            </form>
+        </div>
+
+        <!-- Halaman 4: Konfirmasi Sukses -->
+        <div id="page4" class="page">
+            <h2>Yeaaayyy! ✨</h2>
+            <p>Request mu berhasil dikirim! 💕</p>
+            <p>Harap menunggu respon dari kami 😇🙏🏻</p>
+            <img src="https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif" class="gif">
+            <button onclick="kembali()">Kembali</button>
+        </div>
+
     </div>
 
     <script>
-        function lanjut() {
-            document.getElementById("requestForm").style.display = "block";
-            document.getElementById("requestForm").classList.add("fade");
-            document.getElementById("gif1").style.display = "block";
+        function nextPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page${page}`).classList.add('active');
         }
 
         document.getElementById("requestForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
             let nama = document.getElementById("nama").value;
             document.getElementById("namaInput").value = nama;
 
-            document.getElementById("requestForm").style.display = "none";
-            document.getElementById("hasil").style.display = "block";
-            document.getElementById("hasil").classList.add("fade");
-            document.getElementById("gif2").style.display = "block";
-            document.getElementById("gif3").style.display = "block";
+            let formData = new FormData(this);
 
-            setTimeout(() => {
-                kembali();
-            }, 3000);
+            fetch("https://formspree.io/f/maneykvq", {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            }).then(response => {
+                if (response.ok) {
+                    nextPage(4);
+                }
+            }).catch(error => {
+                alert("Terjadi kesalahan, coba lagi!");
+            });
         });
 
         function kembali() {
