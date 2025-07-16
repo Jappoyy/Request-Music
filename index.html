@@ -81,6 +81,87 @@
 
     </style>
 </head>
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request Playlist Musik</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      text-align: center;
+      padding: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    .dark-mode input, .dark-mode button {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #555;
+    }
+
+    #darkModeToggle {
+      margin-top: 30px;
+      background-color: #333;
+    }
+
+    .dark-mode #darkModeToggle {
+      background-color: #eee;
+      color: #121212;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Request Playlist Musik 🎶</h1>
+
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="text" name="lagu" placeholder="Judul lagu" required />
+    <input type="text" name="penyanyi" placeholder="Nama penyanyi" required />
+    <button type="submit">Kirim Request</button>
+  </form>
+
+  <button id="darkModeToggle" onclick="toggleDarkMode()">🌙 Aktifkan Dark Mode</button>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const btn = document.getElementById('darkModeToggle');
+      btn.textContent = document.body.classList.contains('dark-mode') ? '☀️ Matikan Dark Mode' : '🌙 Aktifkan Dark Mode';
+    }
+  </script>
+
 <body>
 
     <div class="container">
